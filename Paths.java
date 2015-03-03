@@ -21,4 +21,12 @@ public class Paths{
 		}
 		return false;
 	}
+
+	public static boolean isDirectFlight(String src, String dest){
+		if(isCityPresent(src)){
+			List<String> source = routes.get(src);
+			return source.contains(dest);
+		}
+		return false;
+	}
 }

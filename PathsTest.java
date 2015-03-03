@@ -26,4 +26,22 @@ public class PathsTest {
         Paths path = new Paths();
         assertFalse(path.isCityPresent("pune"));
     }
+
+    @Test
+    public void test_isDirectFlight_should_return_true_if_src_is_bangalore_and_dest_is_singapore(){
+        Paths path = new Paths();
+        assertTrue(path.isDirectFlight("bangalore","singapore"));
+    }
+
+    @Test
+    public void test_isDirectFlight_should_return_false_if_src_is_bangalore_and_dest_is_lahore(){
+        Paths path = new Paths();
+        assertFalse(path.isDirectFlight("bangalore","lahore"));
+    }
+
+    @Test
+    public void test_isDirectFlight_should_return_false_if_src_is_london_and_dest_is_singapore(){
+        Paths path = new Paths();
+        assertFalse(path.isDirectFlight("london","lahore"));
+    }
 }
