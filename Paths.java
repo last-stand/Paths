@@ -5,12 +5,26 @@ public class Paths{
 	static{
 		List<String> bangalore = new ArrayList<String>();
 		bangalore.add("singapore");
-		bangalore.add("tokyo");
+
+		List<String> singapore = new ArrayList<String>();
+		singapore.add("seoul");
+		singapore.add("bangalore");
+
+		List<String> seoul = new ArrayList<String>();
+		seoul.add("beijing");
+		seoul.add("singapore");
+
+		List<String> beijing = new ArrayList<String>();
+		beijing.add("tokyo");
+		beijing.add("seoul");
 
 		List<String> tokyo = new ArrayList<String>();
-		tokyo.add("bangalore");
+		tokyo.add("beijing");		
 
 		routes.put("bangalore",bangalore);
+		routes.put("singapore",singapore);
+		routes.put("seoul",seoul);
+		routes.put("beijing",beijing);
 		routes.put("tokyo",tokyo);
 	}
 

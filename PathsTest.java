@@ -46,9 +46,9 @@ public class PathsTest {
     }
 
      @Test
-    public void test_isDirectFlight_should_return_true_if_src_is_tokyo_and_dest_is_bangalore(){
+    public void test_isDirectFlight_should_return_true_if_src_is_tokyo_and_dest_is_beijing(){
         Paths path = new Paths();
-        assertTrue(path.isDirectFlight("tokyo","bangalore"));
+        assertTrue(path.isDirectFlight("tokyo","beijing"));
     }
 
     @Test
