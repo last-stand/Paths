@@ -23,10 +23,23 @@ public class Paths{
 	}
 
 	public static boolean isDirectFlight(String src, String dest){
-		if(isCityPresent(src)){
-			List<String> source = routes.get(src);
+		List<String> source = routes.get(src);
+		if(source != null)
 			return source.contains(dest);
-		}
 		return false;
+	}
+
+	public static void main(String[] args) {
+		String src = args[0].toLowerCase();
+		String dest = args[1].toLowerCase();
+		if(!isCityPresent(src)){
+			System.out.println("No city named "+ src +" in database");
+			return;
+		}
+		if(!isCityPresent(dest)){
+			System.out.println("No city named "+ dest +" in database");
+			return;
+		}
+		System.out.println(isDirectFlight(src,dest));
 	}
 }
