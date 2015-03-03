@@ -16,9 +16,21 @@ public class PathsTest {
     }
 
     @Test
+    public void test_isCityPresent_should_return_true_if_tokyo_present_in_map(){
+        Paths path = new Paths();
+        assertTrue(path.isCityPresent("tokyo"));
+    }
+
+    @Test
     public void test_isCityPresent_should_return_false_if_london_do_not_present_in_map(){
         Paths path = new Paths();
         assertFalse(path.isCityPresent("london"));
+    }
+
+    @Test
+    public void test_isCityPresent_should_return_false_if_stockholm_do_not_present_in_map(){
+        Paths path = new Paths();
+        assertFalse(path.isCityPresent("stockholm"));
     }
 
     @Test
@@ -31,6 +43,12 @@ public class PathsTest {
     public void test_isDirectFlight_should_return_true_if_src_is_bangalore_and_dest_is_singapore(){
         Paths path = new Paths();
         assertTrue(path.isDirectFlight("bangalore","singapore"));
+    }
+
+     @Test
+    public void test_isDirectFlight_should_return_true_if_src_is_tokyo_and_dest_is_bangalore(){
+        Paths path = new Paths();
+        assertTrue(path.isDirectFlight("tokyo","bangalore"));
     }
 
     @Test

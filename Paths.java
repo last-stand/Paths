@@ -5,8 +5,13 @@ public class Paths{
 	static{
 		List<String> bangalore = new ArrayList<String>();
 		bangalore.add("singapore");
+		bangalore.add("tokyo");
+
+		List<String> tokyo = new ArrayList<String>();
+		tokyo.add("bangalore");
 
 		routes.put("bangalore",bangalore);
+		routes.put("tokyo",tokyo);
 	}
 
 	public static boolean isCityPresent(String city){
