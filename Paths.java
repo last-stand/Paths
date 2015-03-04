@@ -9,6 +9,7 @@ public class Paths{
 		List<String> singapore = new ArrayList<String>();
 		singapore.add("seoul");
 		singapore.add("bangalore");
+		singapore.add("dubai");
 
 		List<String> seoul = new ArrayList<String>();
 		seoul.add("beijing");
@@ -19,13 +20,17 @@ public class Paths{
 		beijing.add("seoul");
 
 		List<String> tokyo = new ArrayList<String>();
-		tokyo.add("beijing");		
+		tokyo.add("beijing");
+
+		List<String> dubai = new ArrayList<String>();
+		tokyo.add("singapore");		
 
 		routes.put("bangalore",bangalore);
 		routes.put("singapore",singapore);
 		routes.put("seoul",seoul);
 		routes.put("beijing",beijing);
 		routes.put("tokyo",tokyo);
+		routes.put("dubai",dubai);
 	}
 
 	public static boolean isCityPresent(String city){
@@ -42,9 +47,9 @@ public class Paths{
 	}
 
 	public static boolean isDirectFlight(String src, String dest){
-		List<String> source = routes.get(src);
-		if(source != null)
-			return source.contains(dest);
+		List<String> destination = routes.get(src);
+		if(destination != null)
+			return destination.contains(dest);
 		return false;
 	}
 

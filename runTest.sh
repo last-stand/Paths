@@ -1,7 +1,7 @@
 echo 'cleaning..'
 rm -f *.class
 echo "compiling..."
-javac -Xlint:unchecked -cp junit-4.10.jar *.java
+javac -Xdiags:verbose -cp junit-4.10.jar *.java
 if [ $? != 0 ] 
 	then exit
 fi
