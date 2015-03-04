@@ -19,4 +19,15 @@ public class FindPathTest {
         flightPath = path.pathFinder("bangalore","singapore");
         assertEquals("bangalore->singapore",path.getPath(flightPath));
     }
+
+    @Test
+    public void test_getPath_should_return_path_from_singapre_to_tokyo(){
+        FindPath path = new FindPath();
+        List<String> flightPath = new ArrayList<String>();
+        flightPath.add("singapore");
+        flightPath.add("seoul");
+        flightPath.add("beijing");
+        flightPath.add("tokyo");
+        assertEquals("singapore->seoul->beijing->tokyo",path.getPath(flightPath));
+    }
 }
