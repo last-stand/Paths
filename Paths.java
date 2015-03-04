@@ -64,6 +64,8 @@ public class Paths{
 			System.out.println("No city named "+ dest +" in database");
 			return;
 		}
-		System.out.println(isDirectFlight(src,dest));
+		FindPath path = new FindPath();
+		List<String> flightPath = path.pathFinder(src,dest);
+		System.out.println(path.getPath(flightPath));
 	}
 }
