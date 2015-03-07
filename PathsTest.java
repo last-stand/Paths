@@ -141,4 +141,14 @@ public class PathsTest {
         assertEquals("beijing",seoul.get(0));
         assertEquals("tokyo",beijing.get(0));
     }
+
+    @Test
+    public void test_lineConvertToArray_should_convert_comma_seperated_line_into_array_string(){
+        MyFileReader reader = new MyFileReader();
+        String cities[] = reader.lineConvertToArray("Mumbai,New Delhi,   Kolkata");
+        assertSame(3,cities.length);
+        assertEquals("mumbai",cities[0]);
+        assertEquals("new delhi",cities[1]);
+        assertEquals("kolkata",cities[2]);
+    }
 }
