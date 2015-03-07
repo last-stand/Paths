@@ -57,6 +57,14 @@ public class Paths{
 	public static void main(String[] args) {
 		String src = args[0].toLowerCase();
 		String dest = args[1].toLowerCase();
+		if(args[0].equals("-f")){
+			MyFileReader reader = new MyFileReader();
+			routes.clear();
+			routes = reader.readFile(args[1]);
+			if(routes == null) return;
+			src = args[2].toLowerCase();
+			dest = args[3].toLowerCase();
+		}
 		if(!isCityPresent(src)){
 			System.out.println("No city named "+ src +" in database");
 			return;
@@ -73,6 +81,7 @@ public class Paths{
 
 class MyFileReader{
 	Map<String,List<String>> fileRoutes = new Hashtable<String,List<String>>();
+
 	public Map<String,List<String>> readFile(String fileName){
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(fileName));
