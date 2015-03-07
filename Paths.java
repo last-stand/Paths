@@ -64,7 +64,8 @@ public class Paths{
 			System.out.println("No city named "+ dest +" in database");
 			return;
 		}
-		FindPath path = new FindPath(src,dest);
-		System.out.println(path.getPath(path.flightPath));
+		FindPath path = new FindPath();
+		path.pathFinder(src,dest);
+		System.out.println(path.pathToString(path.flightPath));
 	}
 }
