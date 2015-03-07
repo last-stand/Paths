@@ -62,4 +62,42 @@ public class PathsTest {
         Paths path = new Paths();
         assertFalse(path.isDirectFlight("london","lahore"));
     }
+
+    @Test
+    public void test_createRoutes_should_put_list_string_in_map_if_not_exist(){
+        MyFileReader reader = new MyFileReader();
+        reader.createRoutes("lucknow,delhi,chennai");
+        Map<String,List<String>> fileRoutes = reader.fileRoutes;
+        assertTrue(fileRoutes.containsKey("lucknow"));
+        assertEquals("delhi",fileRoutes.get("lucknow").get(0));
+        assertEquals("chennai",fileRoutes.get("lucknow").get(1));
+    }
+
+    @Test
+    public void test_createRoutes_should_put_multiple_list_string_in_map_if_not_exist(){
+        MyFileReader reader = new MyFileReader();
+        reader.createRoutes("lucknow,delhi,chennai");
+        reader.createRoutes("bangalore,kolkata,jaipur");
+        Map<String,List<String>> fileRoutes = reader.fileRoutes;
+        assertTrue(fileRoutes.containsKey("lucknow"));
+        assertTrue(fileRoutes.containsKey("bangalore"));
+        assertEquals("delhi",fileRoutes.get("lucknow").get(0));
+        assertEquals("chennai",fileRoutes.get("lucknow").get(1));
+        assertEquals("kolkata",fileRoutes.get("bangalore").get(0));
+        assertEquals("jaipur",fileRoutes.get("bangalore").get(1));
+    }
+
+    @Test
+    public void test_createRoutes_should_create_single_map_with_lucknow_as_key_which_contains_all_cities(){
+        MyFileReader reader = new MyFileReader();
+        reader.createRoutes("lucknow,delhi,chennai,allahabad");
+        reader.createRoutes("lucknow,kanpur,jammu");
+        Map<String,List<String>> fileRoutes = reader.fileRoutes;
+        assertTrue(fileRoutes.containsKey("lucknow"));
+        assertEquals("delhi",fileRoutes.get("lucknow").get(0));
+        assertEquals("chennai",fileRoutes.get("lucknow").get(1));
+        assertEquals("allahabad",fileRoutes.get("lucknow").get(2));
+        assertEquals("kanpur",fileRoutes.get("lucknow").get(3));
+        assertEquals("jammu",fileRoutes.get("lucknow").get(4));
+    }
 }

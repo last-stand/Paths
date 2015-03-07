@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Paths{
 	static Map<String,List<String>> routes = new Hashtable<String,List<String>>();
@@ -67,5 +68,42 @@ public class Paths{
 		FindPath path = new FindPath();
 		path.pathFinder(src,dest);
 		System.out.println(path.pathToString(path.flightPath));
+	}
+}
+
+class MyFileReader{
+	Map<String,List<String>> fileRoutes = new Hashtable<String,List<String>>();
+	public Map<String,List<String>> readFile(String fileName){
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = br.readLine()) != null){
+				createRoutes(line);
+			}
+			br.close();
+		}
+		catch(Exception e){
+			System.out.println("No database named "+fileName+" found.");
+		}
+		return this.fileRoutes;
+	}
+
+	public void createRoutes(String line){
+		line = line.replaceAll("\\s+","");
+		String cities[] = line.split(",");
+		List<String> allDestinations = fileRoutes.get(cities[0]);
+		if(allDestinations == null){
+			allDestinations = new ArrayList<String>();
+			for (int i=1; i<cities.length; i++)
+				allDestinations.add(cities[i]);
+			fileRoutes.put(cities[0],allDestinations);
+		}
+		else{
+			for (int i=1; i<cities.length; i++){
+				if(!allDestinations.contains(cities[i]))
+					allDestinations.add(cities[i]);
+			}
+		}
 	}
 }

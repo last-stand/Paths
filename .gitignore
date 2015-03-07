@@ -3,3 +3,7 @@ PathsTest.class
 FindPath.class
 FindPathTest.class
 build.xml
+spikes.java
+spikes.class
+MyFileReader.class
+paths.txt
