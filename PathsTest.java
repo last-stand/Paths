@@ -100,4 +100,45 @@ public class PathsTest {
         assertEquals("kanpur",fileRoutes.get("lucknow").get(3));
         assertEquals("jammu",fileRoutes.get("lucknow").get(4));
     }
+
+    @Test
+    public void test_readFile_should_read_text_file_and_return_map_with_first_word_as_key(){
+        MyFileReader reader = new MyFileReader();
+        Map<String,List<String>> mapPath = reader.readFile("paths.txt");
+        Set<String> cities = mapPath.keySet();
+        assertTrue(cities.contains("bangalore"));
+        assertTrue(cities.contains("singapore"));
+        assertTrue(cities.contains("seoul"));
+        assertTrue(cities.contains("beijing"));
+        assertSame(4,cities.size());
+    }
+
+    @Test
+    public void test_readFile_should_return_map_with_unique_cities_but_all_related_destinations(){
+        MyFileReader reader = new MyFileReader();
+        Map<String,List<String>> mapPath = reader.readFile("paths.txt");
+        List<String> bangalore = mapPath.get("bangalore");
+        List<String> singapore = mapPath.get("singapore");
+        List<String> seoul = mapPath.get("seoul");
+        List<String> beijing = mapPath.get("beijing");
+        assertSame(1,bangalore.size());
+        assertSame(2,singapore.size());
+        assertSame(1,seoul.size());
+        assertSame(1,beijing.size());
+    }
+
+    @Test
+    public void test_readFile_should_return_map_with_cities_and_theirs_all_destinations(){
+        MyFileReader reader = new MyFileReader();
+        Map<String,List<String>> mapPath = reader.readFile("paths.txt");
+        List<String> bangalore = mapPath.get("bangalore");
+        List<String> singapore = mapPath.get("singapore");
+        List<String> seoul = mapPath.get("seoul");
+        List<String> beijing = mapPath.get("beijing");
+        assertEquals("singapore",bangalore.get(0));
+        assertEquals("seoul",singapore.get(0));
+        assertEquals("dubai",singapore.get(1));
+        assertEquals("beijing",seoul.get(0));
+        assertEquals("tokyo",beijing.get(0));
+    }
 }

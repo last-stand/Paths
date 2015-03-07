@@ -92,17 +92,17 @@ class MyFileReader{
 	public void createRoutes(String line){
 		line = line.replaceAll("\\s+","");
 		String cities[] = line.split(",");
-		List<String> allDestinations = fileRoutes.get(cities[0]);
+		List<String> allDestinations = fileRoutes.get(cities[0].toLowerCase());
 		if(allDestinations == null){
 			allDestinations = new ArrayList<String>();
 			for (int i=1; i<cities.length; i++)
-				allDestinations.add(cities[i]);
-			fileRoutes.put(cities[0],allDestinations);
+				allDestinations.add(cities[i].toLowerCase());
+			fileRoutes.put(cities[0].toLowerCase(),allDestinations);
 		}
 		else{
 			for (int i=1; i<cities.length; i++){
-				if(!allDestinations.contains(cities[i]))
-					allDestinations.add(cities[i]);
+				if(!allDestinations.contains(cities[i].toLowerCase()))
+					allDestinations.add(cities[i].toLowerCase());
 			}
 		}
 	}
