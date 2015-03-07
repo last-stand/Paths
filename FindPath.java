@@ -1,16 +1,22 @@
 import java.util.*;
 
 public class FindPath extends Paths{
-	static List<String> flightPath = new ArrayList<String>();
-
-	public static List<String> pathFinder(String source,String destination){
+	Queue<String> flightPath = new LinkedList<String>();
+	static String source, destination;
+	FindPath(String source, String destination){
+		this.source = source;
+		this.destination = destination;
+	}
+	public int pathFinder(){
 		flightPath.add(source);
-		if(isDirectFlight(source,destination))
+		if(isDirectFlight(source,destination)){
 		 	flightPath.add(destination);
-		return flightPath;
+		 	return 1;
+		}
+		return 0;
 	}
 
-	public static String getPath(List<String> path){
+	public static String getPath(Queue<String> path){
 		String pathStr = "";
 		for(String str : path)
 			pathStr += str + "->";
