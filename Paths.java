@@ -58,10 +58,10 @@ public class Paths{
 		String src = args[0].toLowerCase();
 		String dest = args[1].toLowerCase();
 		if(args[0].equals("-f")){
-			MyFileReader reader = new MyFileReader();
 			routes.clear();
+			MyFileReader reader = new MyFileReader();
 			routes = reader.readFile(args[1]);
-			if(routes == null) return;
+			if(routes.isEmpty()) return;
 			src = args[2].toLowerCase();
 			dest = args[3].toLowerCase();
 		}
