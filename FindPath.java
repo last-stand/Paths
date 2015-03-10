@@ -44,6 +44,18 @@ public class FindPath extends Paths{
 		}
 	}
 
+	public void addCountryToCity(){
+		Queue<String> cityAndCountry = new LinkedList<String>();
+		for (String city: flightPath) {
+			 String country = cityWithCountry.get(city);
+			 cityAndCountry.add(city+"["+country+"]");
+		}
+		flightPath.clear();
+		for (String city: cityAndCountry){
+			flightPath.add(city);
+		}
+	}
+
 	public static String pathToString(Queue<String> path){
 		return String.join("->",path);
 	}

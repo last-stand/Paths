@@ -63,4 +63,20 @@ public class FindPathTest {
         assertEquals(path.cityWithCountry.get("dubai"),"uae");
         assertEquals(path.cityWithCountry.get("beijing"),"china");
     }
+
+    @Test
+    public void test_addCountryToCity_should_add_country_after_city_name(){
+        FindPath path = new FindPath();
+        path.flightPath.add("singapore");
+        path.flightPath.add("tokyo");
+        path.flightPath.add("seoul");
+        path.flightPath.add("beijing");
+        path.readCountryFromFile("cities.txt");
+        path.addCountryToCity();
+        assertTrue(path.flightPath.size() == 4);
+        assertEquals("singapore[singapore]",path.flightPath.poll());
+        assertEquals("tokyo[japan]",path.flightPath.poll());
+        assertEquals("seoul[south korea]",path.flightPath.poll());
+        assertEquals("beijing[china]",path.flightPath.poll());
+    }
 }
