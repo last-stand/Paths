@@ -1,7 +1,9 @@
 import java.util.*;
+import java.io.*;
 
 public class FindPath extends Paths{
 	Queue<String> flightPath = new LinkedList<String>();
+	Map<String,String> cityWithCountry = new Hashtable<String,String>();
 
 	public boolean pathFinder(String source, String destination){
 		flightPath.add(source);
@@ -23,6 +25,23 @@ public class FindPath extends Paths{
 			}
 		}
 		return 0;
+	}
+
+	public void readCountryFromFile(String fileName){
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
+			MyFileReader fr = new MyFileReader();
+			String line = null;
+			while ((line = br.readLine()) != null){
+				String cities[] = fr.lineConvertToArray(line);
+				if(!cityWithCountry.containsKey(cities[0]))
+					cityWithCountry.put(cities[0],cities[1]);
+			}
+			br.close();
+		}
+		catch(Exception e){
+			System.out.println("No database named "+fileName+" found.");
+		}
 	}
 
 	public static String pathToString(Queue<String> path){

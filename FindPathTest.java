@@ -50,4 +50,17 @@ public class FindPathTest {
         assertTrue(path.pathFinder("bangalore","dubai"));
         assertEquals("bangalore->singapore->dubai",path.pathToString(path.flightPath));
     }
+
+    @Test
+    public void test_readCountryFromFile_should_put_city_and_country_in_hash_table(){
+        FindPath path = new FindPath();
+        path.readCountryFromFile("cities.txt");
+        assertTrue(path.cityWithCountry.size() == 6);
+        assertEquals(path.cityWithCountry.get("bangalore"),"india");
+        assertEquals(path.cityWithCountry.get("tokyo"),"japan");
+        assertEquals(path.cityWithCountry.get("singapore"),"singapore");
+        assertEquals(path.cityWithCountry.get("seoul"),"south korea");
+        assertEquals(path.cityWithCountry.get("dubai"),"uae");
+        assertEquals(path.cityWithCountry.get("beijing"),"china");
+    }
 }
