@@ -45,13 +45,6 @@ public class FindPathTest {
     }
 
     @Test
-    public void test_getPath_should_return_path_from_bangalore_to_dubai(){
-        FindPath path = new FindPath();
-        assertTrue(path.pathFinder("bangalore","dubai"));
-        assertEquals("bangalore->singapore->dubai",path.pathToString(path.flightPath));
-    }
-
-    @Test
     public void test_readCountryFromFile_should_put_city_and_country_in_hash_table(){
         FindPath path = new FindPath();
         path.readCountryFromFile("cities.txt");
@@ -78,5 +71,14 @@ public class FindPathTest {
         assertEquals("tokyo[japan]",path.flightPath.poll());
         assertEquals("seoul[south korea]",path.flightPath.poll());
         assertEquals("beijing[china]",path.flightPath.poll());
+    }
+
+    @Test
+    public void test_getPath_should_return_path_from_bangalore_to_dubai_with_countries(){
+        FindPath path = new FindPath();
+        assertTrue(path.pathFinder("bangalore","dubai"));
+        path.readCountryFromFile("cities.txt");
+        path.addCountryToCity();
+        assertEquals("bangalore[india]->singapore[singapore]->dubai[uae]",path.pathToString(path.flightPath));
     }
 }
