@@ -151,4 +151,14 @@ public class PathsTest {
         assertEquals("new delhi",cities[1]);
         assertEquals("kolkata",cities[2]);
     }
+
+    @Test
+    public void test_getFiles_should_return_list_of_all_existing_files_from_given_argumrnts(){
+        MyFileReader reader = new MyFileReader();
+        String[] args = new String[]{"-f","paths.txt","-c","cities.txt"};
+        List<String> fileList = reader.getFiles(args);
+        assertSame(2,fileList.size());
+        assertEquals("paths.txt",fileList.get(0));
+        assertEquals("cities.txt",fileList.get(1));
+    }
 }

@@ -85,7 +85,6 @@ class MyFileReader{
 	public Map<String,List<String>> readFile(String fileName){
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(fileName));
-			StringBuilder sb = new StringBuilder();
 			String line = null;
 			while ((line = br.readLine()) != null){
 				createRoutes(line);
@@ -113,6 +112,15 @@ class MyFileReader{
 					allDestinations.add(cities[i]);
 			}
 		}
+	}
+
+	public List<String> getFiles(String[] args){	
+		List<String> fileList = new ArrayList<String>();
+		for (String file: args){
+			if((file.length()) > 0 && (new File(file).exists()))
+				fileList.add(file);
+		}
+		return fileList;
 	}
 
 	public String[] lineConvertToArray(String line){
