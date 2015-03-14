@@ -110,7 +110,7 @@ public class PathsTest {
         assertTrue(cities.contains("singapore"));
         assertTrue(cities.contains("seoul"));
         assertTrue(cities.contains("beijing"));
-        assertSame(4,cities.size());
+        assertSame(6,cities.size());
     }
 
     @Test
@@ -122,7 +122,7 @@ public class PathsTest {
         List<String> seoul = mapPath.get("seoul");
         List<String> beijing = mapPath.get("beijing");
         assertSame(1,bangalore.size());
-        assertSame(2,singapore.size());
+        assertSame(3,singapore.size());
         assertSame(1,seoul.size());
         assertSame(1,beijing.size());
     }
@@ -154,9 +154,9 @@ public class PathsTest {
 
     @Test
     public void test_getFiles_should_return_list_of_all_existing_files_from_given_argumrnts(){
-        MyFileReader reader = new MyFileReader();
+        Paths path = new Paths();
         String[] args = new String[]{"-f","paths.txt","-c","cities.txt"};
-        List<String> fileList = reader.getFiles(args);
+        List<String> fileList = path.fileSeperator(args);
         assertSame(2,fileList.size());
         assertEquals("paths.txt",fileList.get(0));
         assertEquals("cities.txt",fileList.get(1));

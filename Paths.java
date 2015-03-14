@@ -54,16 +54,35 @@ public class Paths{
 		return false;
 	}
 
+	public List<String> fileSeperator(String[] args){
+		List<String> fileList = new ArrayList<String>();
+		for (String file: args){
+			if((file.length()) > 0 && (new File(file).exists()))
+				fileList.add(file);
+		}
+		return fileList;
+	}
+
 	public static void main(String[] args) {
 		String src = args[0].toLowerCase();
 		String dest = args[1].toLowerCase();
+		FindPath fpath = new FindPath();
+		boolean isCountryRead = false;
 		if(args[0].equals("-f")){
 			routes.clear();
 			MyFileReader reader = new MyFileReader();
 			routes = reader.readFile(args[1]);
 			if(routes.isEmpty()) return;
-			src = args[2].toLowerCase();
-			dest = args[3].toLowerCase();
+			if(args[2].equals("-c")){
+				isCountryRead = fpath.readCountryFromFile(args[3]);
+				if(isCountryRead == false) return;
+				src = args[4].toLowerCase();
+				dest = args[5].toLowerCase();
+			}
+			else{
+				src = args[2].toLowerCase();
+				dest = args[3].toLowerCase();
+			}
 		}
 		if(!isCityPresent(src)){
 			System.out.println("No city named "+ src +" in database");
@@ -73,9 +92,9 @@ public class Paths{
 			System.out.println("No city named "+ dest +" in database");
 			return;
 		}
-		FindPath path = new FindPath();
-		path.pathFinder(src,dest);
-		System.out.println(path.pathToString(path.flightPath));
+		fpath.pathFinder(src,dest);
+		if(isCountryRead == true){ fpath.addCountryToCity();}
+		System.out.println(fpath.pathToString(fpath.flightPath));
 	}
 }
 
@@ -112,15 +131,6 @@ class MyFileReader{
 					allDestinations.add(cities[i]);
 			}
 		}
-	}
-
-	public List<String> getFiles(String[] args){	
-		List<String> fileList = new ArrayList<String>();
-		for (String file: args){
-			if((file.length()) > 0 && (new File(file).exists()))
-				fileList.add(file);
-		}
-		return fileList;
 	}
 
 	public String[] lineConvertToArray(String line){

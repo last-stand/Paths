@@ -27,7 +27,16 @@ public class FindPath extends Paths{
 		return 0;
 	}
 
-	public void readCountryFromFile(String fileName){
+	public boolean allPathFinder(String source, String destination){
+		flightPath.add(source);
+		return (getAllFlightPath(source,destination) == 1) ? true : false;
+	}
+
+	public int getAllFlightPath(String source, String destination){
+		return 0;
+	}
+
+	public boolean readCountryFromFile(String fileName){
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(fileName));
 			MyFileReader fr = new MyFileReader();
@@ -41,7 +50,9 @@ public class FindPath extends Paths{
 		}
 		catch(Exception e){
 			System.out.println("No database named "+fileName+" found.");
+			return false;
 		}
+		return true;
 	}
 
 	public void addCountryToCity(){
