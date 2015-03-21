@@ -65,12 +65,12 @@ public class FindPathTest {
         path.flightPath.add("seoul");
         path.flightPath.add("beijing");
         path.readCountryFromFile("cities.txt");
-        path.addCountryToCity();
+        Queue<String> cityAndCountry = path.addCountryToCity(path.flightPath);
         assertTrue(path.flightPath.size() == 4);
-        assertEquals("singapore[singapore]",path.flightPath.poll());
-        assertEquals("tokyo[japan]",path.flightPath.poll());
-        assertEquals("seoul[south korea]",path.flightPath.poll());
-        assertEquals("beijing[china]",path.flightPath.poll());
+        assertEquals("singapore[singapore]",cityAndCountry.poll());
+        assertEquals("tokyo[japan]",cityAndCountry.poll());
+        assertEquals("seoul[south korea]",cityAndCountry.poll());
+        assertEquals("beijing[china]",cityAndCountry.poll());
     }
 
     @Test
@@ -78,7 +78,57 @@ public class FindPathTest {
         FindPath path = new FindPath();
         assertTrue(path.pathFinder("bangalore","dubai"));
         path.readCountryFromFile("cities.txt");
-        path.addCountryToCity();
-        assertEquals("bangalore[india]->singapore[singapore]->dubai[uae]",path.pathToString(path.flightPath));
+        String expectedPath = path.pathToString(path.addCountryToCity(path.flightPath));
+        assertEquals("bangalore[india]->singapore[singapore]->dubai[uae]",expectedPath);
+    }
+
+    @Test
+    public void test_allPathFinder_should_return_2_possible_paths_seoul_to_singapore(){
+        FindPath path = new FindPath();
+        List<Queue<String>> allPaths = path.allPathFinder("seoul","singapore");
+        Queue<String> path1 = allPaths.get(0);
+        Queue<String> path2 = allPaths.get(1);
+        assertEquals(allPaths.size(),2);
+        assertEquals(path1.poll(),"seoul");
+        assertEquals(path1.poll(),"beijing");
+        assertEquals(path1.poll(),"tokyo");
+        assertEquals(path1.poll(),"singapore");
+        assertEquals(path2.poll(),"seoul");
+        assertEquals(path2.poll(),"singapore");
+    }
+
+    @Test
+    public void test_allPathFinder_should_return_2_possible_paths_singapore_to_tokyo(){
+        FindPath path = new FindPath();
+        List<Queue<String>> allPaths = path.allPathFinder("tokyo","singapore");
+        Queue<String> path1 = allPaths.get(0);
+        Queue<String> path2 = allPaths.get(1);
+        assertEquals(allPaths.size(),2);
+        assertEquals(path1.poll(),"tokyo");
+        assertEquals(path1.poll(),"beijing");
+        assertEquals(path1.poll(),"seoul");
+        assertEquals(path1.poll(),"singapore");
+        assertEquals(path2.poll(),"tokyo");
+        assertEquals(path2.poll(),"singapore");
+    }
+
+    @Test
+    public void test_allPathFinder_should_return_1_possible_paths_singapore_to_tokyo(){
+        FindPath path = new FindPath();
+        List<Queue<String>> allPaths = path.allPathFinder("bangalore","beijing");
+        Queue<String> maidenPath = allPaths.get(0);
+        assertEquals(allPaths.size(),1);
+        assertEquals(maidenPath.poll(),"bangalore");
+        assertEquals(maidenPath.poll(),"singapore");
+        assertEquals(maidenPath.poll(),"seoul");
+        assertEquals(maidenPath.poll(),"beijing");
+    }
+
+    @Test
+    public void test_allPathToString_should_return_2_possible_paths_singapore_to_tokyo_as_string(){
+        FindPath path = new FindPath();
+        List<Queue<String>> allPaths = path.allPathFinder("tokyo","singapore");
+        String expectedPath = "tokyo->beijing->seoul->singapore\ntokyo->singapore\n";
+        assertEquals(path.allPathToString(allPaths),expectedPath);
     }
 }

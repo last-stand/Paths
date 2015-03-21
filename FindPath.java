@@ -27,13 +27,28 @@ public class FindPath extends Paths{
 		return 0;
 	}
 
-	public boolean allPathFinder(String source, String destination){
-		flightPath.add(source);
-		return (getAllFlightPath(source,destination) == 1) ? true : false;
+	public List<Queue<String>> allPathFinder(String source, String destination){
+		Queue<String> fullPath = new LinkedList<String>();
+        List<Queue<String>> allPaths = new ArrayList<Queue<String>>();
+        getAllFlightPath(fullPath, allPaths,source, destination);
+        return allPaths;
 	}
 
-	public int getAllFlightPath(String source, String destination){
-		return 0;
+	public void getAllFlightPath(Queue<String> fullPath, List<Queue<String>> allPaths,String source, String destination){
+		fullPath.add(source);
+        if (source.equals(destination)) {
+            allPaths.add(new LinkedList<String>(fullPath));
+            fullPath.remove(source);
+            return;
+        }
+        int size = routes.get(source).size();
+        List<String> destinations = routes.get(source);
+        for (int i = 0; i < destinations.size(); i++) {
+            if (!fullPath.contains(destinations.get(i))) {
+                getAllFlightPath(fullPath, allPaths, destinations.get(i), destination);
+            }
+        }
+        fullPath.remove(source);
 	}
 
 	public boolean readCountryFromFile(String fileName){
@@ -55,16 +70,20 @@ public class FindPath extends Paths{
 		return true;
 	}
 
-	public void addCountryToCity(){
+	public Queue<String> addCountryToCity(Queue<String> allCities){
 		Queue<String> cityAndCountry = new LinkedList<String>();
-		for (String city: flightPath) {
+		for (String city: allCities) {
 			 String country = cityWithCountry.get(city);
 			 cityAndCountry.add(city+"["+country+"]");
 		}
-		flightPath.clear();
-		for (String city: cityAndCountry){
-			flightPath.add(city);
-		}
+		return cityAndCountry;
+	}
+
+	public String allPathToString(List<Queue<String>> allFlightPaths){
+		String allPaths = "";
+		for (Queue<String> path : allFlightPaths)
+			allPaths += pathToString(path) + "\n";
+		return allPaths;
 	}
 
 	public static String pathToString(Queue<String> path){

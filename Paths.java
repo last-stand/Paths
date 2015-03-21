@@ -93,8 +93,13 @@ public class Paths{
 			return;
 		}
 		fpath.pathFinder(src,dest);
-		if(isCountryRead == true){ fpath.addCountryToCity();}
+		if(isCountryRead == true){ 
+			Queue<String> cityAndCountry = fpath.addCountryToCity(fpath.flightPath);
+			System.out.println(fpath.pathToString(cityAndCountry));
+			return;
+		}
 		System.out.println(fpath.pathToString(fpath.flightPath));
+		
 	}
 }
 
